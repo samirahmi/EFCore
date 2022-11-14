@@ -48,7 +48,7 @@ namespace Day15_EFCore.DataBase
                 });
 
             modelBuilder.Entity<Student>().Property(lu => lu.LastUpdate).ValueGeneratedOnAddOrUpdate();
-            modelBuilder.Entity<Student>().Property(lu => lu.LastUpdate).HasDefaultValueSql("Now()");
+            modelBuilder.Entity<Student>().Property(lu => lu.LastUpdate).HasDefaultValueSql("UtcNow()");
 
             modelBuilder.Entity<Student>().Property(g => g.Gender)
                 .HasConversion(

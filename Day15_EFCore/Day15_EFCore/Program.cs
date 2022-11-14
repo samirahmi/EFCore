@@ -153,22 +153,52 @@ using Microsoft.EntityFrameworkCore;
 
 //}
 
+//class Program
+//{
+//    static void Main()
+//    {
+//        var context = new SchoolContext();
+//        var student = context.Students.FirstOrDefault(w => w.StudentId == 1);
+
+//        //student.StudentId = 1;
+//        //student.StudentCode = "SIS-001";
+//        //student.StudentName = "Gaara";
+//        //student.DoB = System.DateTime.UtcNow;
+//        //student.Gender = 1;
+//        //context.Students.Update(student);
+//        //context.SaveChanges();
+
+//        Console.WriteLine($"{student.StudentId} - {student.StudentName} - {student.Gender}");
+//    }
+//}
+
 class Program
 {
     static void Main()
     {
         var context = new SchoolContext();
-        var student = context.Students.FirstOrDefault(w => w.StudentId == 1);
+        var student1 = new Student();
+        student1.StudentId = 2;
+        student1.StudentCode = "SIS-002";
+        student1.StudentName = "Uzumaki";
+        student1.DoB = DateTime.UtcNow;
+        student1.Gender = Gender.Male;
 
-        //student.StudentId = 1;
-        //student.StudentCode = "SIS-001";
-        //student.StudentName = "Gaara";
-        //student.DoB = System.DateTime.UtcNow;
-        //student.Gender = 1;
-        //context.Students.Update(student);
-        //context.SaveChanges();
+        var student2 = new Student();
+        student1.StudentId = 3;
+        student2.StudentCode = "SIS-003";
+        student2.StudentName = "Hinata";
+        student2.DoB = DateTime.UtcNow;
+        student2.Gender = Gender.Female;
 
-        Console.WriteLine($"{student.StudentId} - {student.StudentName} - {student.Gender}");
+        var studentList = new List<Student>();
+        studentList.Add(student1);
+        studentList.Add(student2);
+
+        context.Students.AddRange(studentList); //Save MultyRecord
+        context.SaveChanges();
+
+        Console.WriteLine("Multi Insert EFCore");
     }
 
 }

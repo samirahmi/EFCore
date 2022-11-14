@@ -3,6 +3,7 @@ using System;
 using Day15_EFCore.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Day15EFCore.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20221114041153_DataSeed5ForTeacher")]
+    partial class DataSeed5ForTeacher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,12 +161,6 @@ namespace Day15EFCore.Migrations
                             TeacherId = 3,
                             FirstName = "Sami",
                             LastName = "Rahmi"
-                        },
-                        new
-                        {
-                            TeacherId = 4,
-                            FirstName = "Uzumaki",
-                            LastName = "Naruto"
                         },
                         new
                         {

@@ -23,6 +23,12 @@ namespace Day15_EFCore.DataBase
         {
             modelBuilder.Entity<StudentCourses>().HasKey(sc => new { sc.StudentId, sc.CourseId });
 
+            modelBuilder.Entity<Teacher>().HasData(
+                new { TeacherId = 1, FirstName = "Andik", LastName = "Rain" },
+                new { TeacherId = 2, FirstName = "Hinata", LastName = "Shoyo" },
+                new { TeacherId = 3, FirstName = "Sami", LastName = "Rahmi" },
+                new { TeacherId = 4, FirstName = "Uzumaki", LastName = "Naruto" },
+                new { TeacherId = 5, FirstName = "Tobio", LastName = "Kageyama" });
         }
     }
 }

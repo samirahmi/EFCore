@@ -118,11 +118,38 @@ class Program
 
         ////==================================================================================
         ////MELIHAT RECORD PERTAMA DARI TABEL STUDENT
-        
+
+        //var context = new SchoolContext();
+        //var student = context.Students
+        //    .Include(s => s.StudentAddress); // setara SELECT * FROM Student LEFT JOIN StudentAddress
+        //Console.ReadKey();
+
+        ////==================================================================================
+        ////MELIHAT VIEW DARI SQL 
+
+        //var context = new SchoolContext();
+        //var viewStudentAddress = context.vw_StudentAddresses.ToList(); // mengambil semua data
+        //foreach(var itemstudent in viewStudentAddress)
+        //{
+        //    Console.WriteLine($"{itemstudent.StudentId} - {itemstudent.StudentName}" +
+        //        $" - {itemstudent.Address1} - {itemstudent.Address2}");
+        //}
+
+        ////==================================================================================
+        ////PERINTAH UNTUK MENGEKSEKUSI PERINTAH NATIVE SQL, sammple adalah VIEW
+        ///
+        //var context = new SchoolContext();
+        //context.Database.ExecuteSqlRaw(
+        //    @"CREATE VIEW View_Student AS SELECT StudentId, StudentName FROM Students");
+
         var context = new SchoolContext();
-        var student = context.Students
-            .Include(s => s.StudentAddress); // setara SELECT * FROM Student LEFT JOIN StudentAddress
-        Console.ReadKey();
+        var students = context.Students.FromSqlRaw(@"SELECT * FROM dbo.""Students""");
+
+        foreach (var student in students)
+        {
+            Console.WriteLine($"{student.StudentId} - {student.StudentName}");
+        }
+
 
     }
 

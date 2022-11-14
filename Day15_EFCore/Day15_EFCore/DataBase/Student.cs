@@ -35,6 +35,10 @@ namespace Day15_EFCore.DataBase
         //public string? Address { get; set; } // Menambahkan Field Baru // string? = nullable (boleh kosong)
         public DateTime? DoB { get; set; }
         public byte? Gender { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime LastUpdate { get;set; }
+
         public virtual StudentAddress StudentAddress { get; set; }
         public virtual ICollection<StudentCourses> StudentCourses { get; set; }
     }

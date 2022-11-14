@@ -15,6 +15,7 @@ namespace Day15_EFCore.DataBase
         public DbSet<Courses> Courses { get; set; }
         public DbSet<StudentCourses> StudentCourses { get; set; } //Table Conjuction
         public DbSet<Parent> Parents { get; set; }
+        public DbSet<vw_StudentAddress> vw_StudentAddresses { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=sami;Database=SchoolDB; TrustServerCertificate=True");
@@ -39,6 +40,12 @@ namespace Day15_EFCore.DataBase
                 new Parent() { ParentId = Guid.NewGuid(), ParentName = "Hatake", Address = "Miyagi" }
                 );
 
+            modelBuilder.Entity<vw_StudentAddress>(
+                vsa =>
+                {
+                    vsa.HasNoKey();
+                    vsa.ToView("view_studentadress");
+                });
         }
 
     }

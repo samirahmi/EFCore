@@ -11,6 +11,7 @@ namespace Day15_EFCore.DataBase
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentAddress> StudentAddresses { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=sami;Database=SchoolDB; TrustServerCertificate=True");

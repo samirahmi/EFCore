@@ -36,5 +36,6 @@ namespace Day15_EFCore.DataBase
         public DateTime? DoB { get; set; }
         public byte? Gender { get; set; }
         public virtual StudentAddress StudentAddress { get; set; }
+        public virtual ICollection<StudentCourses> StudentCourses { get; set; }
     }
 }

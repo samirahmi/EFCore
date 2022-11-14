@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Day15_EFCore.DataBase
 {
@@ -24,6 +26,6 @@ namespace Day15_EFCore.DataBase
         [Column(TypeName = "VarChar(100)")]
         [Display(Name = "Last Name")]
         public string? LastName { get; set; }
-
+        public virtual ICollection<Courses> Courses { get; set; }
     }
 }

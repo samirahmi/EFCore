@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Day15EFCore.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20221114021548_AddTableTeacher")]
-    partial class AddTableTeacher
+    [Migration("20221114025808_AddCourseAndTeacher")]
+    partial class AddCourseAndTeacher
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,28 @@ namespace Day15EFCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Day15_EFCore.DataBase.Courses", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CourseId"));
+
+                    b.Property<string>("CourseName")
+                        .IsRequired()
+                        .HasColumnType("VarChar(200)");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CourseId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Courses", "dbo");
+                });
 
             modelBuilder.Entity("Day15_EFCore.DataBase.Student", b =>
                 {
@@ -104,6 +126,17 @@ namespace Day15EFCore.Migrations
                     b.ToTable("Teachers", "dbo");
                 });
 
+            modelBuilder.Entity("Day15_EFCore.DataBase.Courses", b =>
+                {
+                    b.HasOne("Day15_EFCore.DataBase.Teacher", "Teachers")
+                        .WithMany("Courses")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Teachers");
+                });
+
             modelBuilder.Entity("Day15_EFCore.DataBase.StudentAddress", b =>
                 {
                     b.HasOne("Day15_EFCore.DataBase.Student", "Student")
@@ -119,6 +152,11 @@ namespace Day15EFCore.Migrations
                 {
                     b.Navigation("StudentAddress")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Day15_EFCore.DataBase.Teacher", b =>
+                {
+                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

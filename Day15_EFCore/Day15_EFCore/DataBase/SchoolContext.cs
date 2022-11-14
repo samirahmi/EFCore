@@ -14,6 +14,7 @@ namespace Day15_EFCore.DataBase
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Courses> Courses { get; set; }
         public DbSet<StudentCourses> StudentCourses { get; set; } //Table Conjuction
+        public DbSet<Parent> Parents { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=sami;Database=SchoolDB; TrustServerCertificate=True");
@@ -28,7 +29,17 @@ namespace Day15_EFCore.DataBase
                 new { TeacherId = 2, FirstName = "Hinata", LastName = "Shoyo" },
                 new { TeacherId = 3, FirstName = "Sami", LastName = "Rahmi" },
                 new { TeacherId = 4, FirstName = "Uzumaki", LastName = "Naruto" },
-                new { TeacherId = 5, FirstName = "Tobio", LastName = "Kageyama" });
+                new { TeacherId = 5, FirstName = "Tobio", LastName = "Kageyama" }
+                );
+
+            modelBuilder.Entity<Parent>().Property(p => p.ParentId).HasDefaultValueSql("gen_random_uuid()");
+
+            modelBuilder.Entity<Parent>().HasData(
+                new Parent() { ParentId = Guid.NewGuid(), ParentName = "Fugaku", Address = "Konoha" },
+                new Parent() { ParentId = Guid.NewGuid(), ParentName = "Hatake", Address = "Miyagi" }
+                );
+
         }
+
     }
 }

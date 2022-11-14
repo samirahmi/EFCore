@@ -90,10 +90,10 @@
 using Day15_EFCore.DataBase;
 using Microsoft.EntityFrameworkCore;
 
-class Program
-{
-    static void Main()
-    {
+//class Program
+//{
+//    static void Main()
+//    {
         ////==================================================================================
         ////MELIHAT RECORD PERTAMA DARI TABEL STUDENT
 
@@ -142,15 +142,33 @@ class Program
         //context.Database.ExecuteSqlRaw(
         //    @"CREATE VIEW View_Student AS SELECT StudentId, StudentName FROM Students");
 
+        //var context = new SchoolContext();
+        //var students = context.Students.FromSqlRaw(@"SELECT * FROM dbo.""Students""");
+
+        //foreach (var student in students)
+        //{
+        //    Console.WriteLine($"{student.StudentId} - {student.StudentName}");
+        //}
+//    }
+
+//}
+
+class Program
+{
+    static void Main()
+    {
         var context = new SchoolContext();
-        var students = context.Students.FromSqlRaw(@"SELECT * FROM dbo.""Students""");
+        var student = context.Students.FirstOrDefault(w => w.StudentId == 1);
 
-        foreach (var student in students)
-        {
-            Console.WriteLine($"{student.StudentId} - {student.StudentName}");
-        }
+        //student.StudentId = 1;
+        //student.StudentCode = "SIS-001";
+        //student.StudentName = "Gaara";
+        //student.DoB = System.DateTime.UtcNow;
+        //student.Gender = 1;
+        //context.Students.Update(student);
+        //context.SaveChanges();
 
-
+        Console.WriteLine($"{student.StudentId} - {student.StudentName} - {student.Gender}");
     }
 
 }

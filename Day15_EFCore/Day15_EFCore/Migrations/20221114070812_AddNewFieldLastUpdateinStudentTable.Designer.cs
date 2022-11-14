@@ -3,6 +3,7 @@ using System;
 using Day15_EFCore.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Day15EFCore.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20221114070812_AddNewFieldLastUpdateinStudentTable")]
+    partial class AddNewFieldLastUpdateinStudentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,13 +69,13 @@ namespace Day15EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            ParentId = new Guid("548fc7c5-3acc-41b3-be56-429905f8a8e1"),
+                            ParentId = new Guid("d21763a0-301f-472d-982e-c3b575d37094"),
                             Address = "Konoha",
                             ParentName = "Fugaku"
                         },
                         new
                         {
-                            ParentId = new Guid("fa6027b0-c8ce-441d-acee-3b39b1735c58"),
+                            ParentId = new Guid("f4df6a84-94eb-4b2e-996e-758ce24045a3"),
                             Address = "Miyagi",
                             ParentName = "Hatake"
                         });
@@ -89,14 +92,12 @@ namespace Day15EFCore.Migrations
                     b.Property<DateTime?>("DoB")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("VarChar(6)");
+                    b.Property<byte?>("Gender")
+                        .HasColumnType("smallint");
 
                     b.Property<DateTime>("LastUpdate")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("Now()");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("StudentCode")
                         .IsRequired()

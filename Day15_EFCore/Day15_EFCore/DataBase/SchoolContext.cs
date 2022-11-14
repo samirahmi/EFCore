@@ -46,6 +46,15 @@ namespace Day15_EFCore.DataBase
                     vsa.HasNoKey();
                     vsa.ToView("view_studentadress");
                 });
+
+            modelBuilder.Entity<Student>().Property(lu => lu.LastUpdate).ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<Student>().Property(lu => lu.LastUpdate).HasDefaultValueSql("Now()");
+
+            modelBuilder.Entity<Student>().Property(g => g.Gender)
+                .HasConversion(
+                eg => eg.ToString(),
+                eg => (Gender)Enum.Parse(typeof(Gender), eg)
+                );
         }
 
     }

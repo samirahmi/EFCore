@@ -34,7 +34,9 @@ namespace Day15_EFCore.DataBase
         //[Display(Name = "Address")]
         //public string? Address { get; set; } // Menambahkan Field Baru // string? = nullable (boleh kosong)
         public DateTime? DoB { get; set; }
-        public byte? Gender { get; set; }
+
+        [Column(TypeName = "VarChar(6)")]
+        public Gender Gender { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdate { get;set; }
